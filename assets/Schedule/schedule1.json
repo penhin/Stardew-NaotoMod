@@ -1,0 +1,10 @@
+{
+	"Mon":"GOTO default",
+    "Tue":"GOTO default",
+	"Wed":"GOTO default",
+	"Thu":"GOTO default",
+	"Fri":"GOTO default",
+	"Set":"GOTO default",
+	"Sun":"GOTO default",
+	"default":"630 AdventureGuild 4 5 2 Kosek_reading/1400 AdventureGuild 10 12 0/2100 AdventureGuild 8 11 2 Kosek_view"
+    }

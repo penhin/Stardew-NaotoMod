@@ -1,0 +1,4 @@
+{
+    "default": "630 Mountain 72 9 2/900 Town 23 27 1/1200 ArchaeologyHouse 3 10 0/1500 ArchaeologyHouse 17 5 0/1600 ArchaeologyHouse 11 9 0/1630 ArchaeologyHouse 19 9 0/1700 AdventureGuild 4 13 0/1740 Custom_KosekRoom 11 5 2/2400 Custom_KosekRoom 1 8 3 111_sleep",//日常行程
+    "marriage_Wed": "900 Forest 42 19/1300 Town 41 57/1500 Town 74 100/1600 BusStop 10 22 2/1800 BusStop -1 23 3",//婚后行程
+}

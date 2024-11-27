@@ -1,0 +1,749 @@
+{
+//温馨提示，请在制作你NPC时，将下文中所有的Naoto替换为你NPC的内部ID或英文名字，祝你好运
+ "Format": "2.3.0",
+ "CustomLocations": [//这是读取单独地图的项，单独写，别写Changes里
+  {
+    "Name": "Custom_NaotoRoom",//添加的地图名字
+    "FromMapFile": "assets/Maps/NaotoRoom.tbin"//你的地图文件路径，请按照你放置的路径来（如前所示，assets[内容文件夹]/Maps[地图文件夹]/111Room.tbin[地图文件]）
+    }
+  ],
+"Changes": [
+  {
+    "Action":"EditMap",//这是读取地图添加到已有地图的某个区域，包括mod拓展的地图
+    "Target":"Maps/AdventureGuild",//你添加的地图要放置到的原地图
+    "FromFile":"assets/Maps/staircase.tbin",//地图文件路径，与单独地图的一样
+    "ToArea":{ "X":9,//这是放置到原地图的横向位置
+              "Y":19,//这是原地图的纵向位置
+              "Width":3,//你要放的地图宽度
+              "Height":2 },//你要放的地图高度
+    "TextOperations": [
+      {
+        "Operation": "Append",//这是添加传送点到原地图
+        "Target": [ "MapProperties", "Warp" ],//这个别动，是传送点属性
+        "Value": "10 20 Custom_NaotoRoom 0 14 6 20 Custom_AdventurerSummit 32 22",//这是添加传送点的位置,格式是（原地图传送位置） （地图名字） （要传送到的地图落点）
+        "Delimiter": " "
+                 }
+         ]
+       },
+            {
+              "Action": "EditData",//角色属性设定
+              "Target": "Data/Characters",
+              "Entries": {
+                "Naoto": {//这是你家NPC的内部ID，必须英文
+                  "DisplayName": "白钟直斗",//游戏内显示名字
+                  "BirthSeason": "summer",//生日季节
+                  "BirthDay": 27,//生日日期
+                  "Age": "TeenAdult",//你NPC的年龄，会影响社交菜单里脸部读取的高度，儿童（Child）降低，青少年（TeenAdult）和成年人（Adult）不变，注意：儿童设定不适用于普通可婚NPC，就算写了可结婚也会被屏蔽掉
+                  "HomeRegion": "Other",//是否为镇上的人，只影响开局交友任务和夏威夷庆典涨好感，如果是写Town，不是写Other
+                  "Language": "Default",//语言，这里指是否会说矮人语（Dwarvish），在获取到矮人语翻译器前会被官方默认的矮人语影响
+                  "Gender": "Female",//性别，男Male，女Female
+                  "CanSocialize": true,//是否可以社交，只能写true或false
+                  "CanCommentOnPurchasedShopItems": false,//是否会评价你卖给各个商店的物品，建议关闭，否则会读取官方默认回答
+                  "CanReceiveGifts": true,//是否可以送礼,同上
+                  "IsDarkSkinned": false,//是否是黑皮基因（你的孩子有可能是黑色皮肤），同上
+                  "CanBeRomanced": true,//能否进行浪漫互动（交往或结婚），同上
+                  "Calendar":"AlwaysShown",//生日是否显示在日历上，HiddenAlways，永远不会出现在日历中；HiddenUntilMet，在玩家遇到之前不会显示在日历中；AlwaysShown，始终显示在日历中。
+                  "SocialTab": "AlwaysShown",//是否出现在社交菜单，HiddenAlways，永远不会出现在社交选项卡中；HiddenUntilMet，在遇到之前不会显示在社交选项卡上；UnknownUntilMet，在玩家遇到之前在社交选项卡上的姓名替换为 “???”；AlwaysShown，始终显示在社交选项卡中（包括的姓名）。
+                  "SpouseAdopts": true,//作为同性伴侣时能否收养孩子，如果不需要该设定可以删掉此条
+                  "SpouseWantsChildren": true,//作为异性伴侣时能否生育孩子，如果不需要此条设定可以删掉
+                  "SpouseGiftJealousy": true,//配偶是否会吃醋你给其他同性别单身NPC送礼，不需要此条设定可以删掉
+                  "SpouseGiftJealousyFriendshipChange": 3,//吃醋时回退的好感度，默认30，没有上一条的情况下请一起删掉
+                  "ItemDeliveryQuests": false,//是否可以发布物品提交任务，如果不想出现这位NPC需要金锭擦臀部这种事情，请关闭此条（false）
+                  "PerfectionScore": false,//检索百分百进度时是否包括此NPC，如果出现了卡97%友谊进度的情况请回来关掉它
+                  "EndSlideShow": true,//该NPC是否出现在山顶结局结尾的动画放映里
+                  "CanVisitIsland": true,//是否会随机前往姜岛度假村
+                  "DumpsterDiveEmote": 8,//看到玩家翻垃圾桶时候产生的表情，一般按年龄默认读取，孩子悲伤，青年问号，成人生气，如果需要正面反映可以更改为32号，并在下一条里修改为正数
+                  "DumpsterDiveFriendshipEffect": 0,//看到玩家翻垃圾桶时减少的好感度，默认-25点，改为正数可以增加好感，可以配合上一条使用
+                  "FlowerDanceCanDance": true,//是否会在花舞节上跳舞，一般按照是否可以进行浪漫互动读取，不需要可以删掉
+                  "WinterStarParticipant": true,//是否能作为冬星节的神秘朋友或送礼人，没写节日站位请关掉，否则当天无法送礼
+                  "ExcludeFromIntroductionsQuest": false,
+                  "ExcludeFromPerfectionScore": false,
+                  "FriendsAndFamily": {},//该NPC的家人名字，会告知你家庭成员的喜好相关
+                  "UnlockConditions": null,
+                  "SpawnIfMissing": true,
+                  //Should be write some contents......
+                  "Home": [
+                    {
+                      "Id": "Default",
+                      "Location": "Custom_NaotoRoom",//这是出生点的名字
+                      "Tile": {
+                        "X": 1,//横向位置
+                        "Y": 8//纵向位置
+                      },
+                      "Direction": "left"//出生时的面部朝向
+                    }
+                  ],
+                  "TextureName": null,
+                  "Size": {
+                    "X": 16,
+                    "Y": 32
+                  },//行走图的大小，一般为X16，Y32，也可以制作动物或者带有特殊装饰NPC的宽体32*32行走图，行程和事件的落点默认读取最左侧的16*32格
+                  "Breather": true,//是否可以呼吸，一般显示为局内的胸腹部图块膨胀
+                  "KissSpriteIndex": 28,//NPC可婚时亲吻动作的行走图位置，默认为第28号（第一帧行走图为0号）
+                  "HiddenProfileEmoteSound": null,
+                  "HiddenProfileEmoteDuration": -1,
+                  "HiddenProfileEmoteStartFrame": 16,
+                  "HiddenProfileEmoteFrameCount": 4,
+                  "HiddenProfileEmoteFrameDuration": 200.0,
+                  "FestivalVanillaActorIndex": 0,
+                  "CustomFields": {},
+                  "SpouseRoom": {
+                    "MapAsset": "Custom_NaotoRoom",//配偶房的内部ID
+                    "MapSourceRect": {
+                        "X": 0,
+                        "Y": 0,
+                        "Width": 6,
+                        "Height": 9//配偶房宽度和高度，不用改
+                    }
+                },
+                "SpousePatio": {
+                    "MapAsset": "Naoto_Spouse_Area",//配偶露台的内部ID
+                    "MapSourceRect": {
+                        "X": 0,
+                        "Y": 0,
+                        "Width": 4,
+                        "Height": 4//配偶露台宽度和高度，不用改
+                    }
+                }
+                }
+              }
+            },
+{
+      "Action":"EditData",
+      "Target":"Data/NPCGiftTastes",
+      "Entries": {
+	   "Naoto": "你似乎很擅长揣摩心思，这礼物对我来说意义非凡，感谢，难为你费心了。/62 119 234 258 268 566/这东西看起来不错，我喜欢这个，非常感谢。/-2 -23 -79 348 395/...谢谢，我应该怎么处理它呢。*嘀咕*/209 212 213 214 219 225 226 227 228 342 637 651/抱歉，我不喜欢这东西，你的好意我收下了，但下次请把它送给更需要它的人。/-4 276 376/嗯，这看起来还不错，谢谢。//"//礼物对话，不多赘述
+  }
+},
+{
+      "Action": "EditData",
+      "Target": "Data/NPCGiftTastes",
+      "Entries": {
+		"Naoto": "给我的吗？你就是我人生中最好的礼物，@，你总能带给我惊喜。/62 119 234 258 268 566/谢谢亲爱的，你送的礼物我都会好好珍藏的，要来个拥抱吗？/-2 -23 -79 348 395/呃...这是...好吧好吧，我会收下的，别这么看着我。/209 212 213 214 219 225 226 227 228 342 637 651/...为什么送我这个，我想你应该很清楚我讨厌它.../-4 276 376/礼物不错，我想我也该多学些菜式做给你吃了。//"//婚后礼物对话，不多赘述
+      },
+	  "When":{
+      	"Relationship:Naoto": "Married"//111为NPC内部ID，识别是否与该NPC已婚的条件，与下篇所有格式相同的都一样
+      }
+    },	
+//杂项对话，1.6能否使用尚且未知
+{
+      "Action": "EditData",
+      "Target": "Data/ExtraDialogue",
+      "Entries": {
+        "Mines_PlayerKilled_Spouse_PlayerFemale": "......@，亲爱的，你在那下面做了什么，我发现你的时候你一点知觉都没有了。$2#$b#千万要注意安全，那下面很危险，我不想再被抛下在这世界上了...$17#$b#...求你了，好吗。$2",//男性农夫作为配偶时在矿井中死亡，NPC将你救出的对话
+        "Mines_PlayerKilled_Spouse_PlayerMale": "......@，亲爱的，你在那下面做了什么，我发现你的时候你一点知觉都没有了。$2#$b#千万要注意安全，那下面很危险，我不想再被抛下在这世界上了...$17#$b#...求你了，好吗。$2"//女性农夫作为配偶时在矿井中死亡，NPC将你救出的对话
+      },
+      "When": {
+        "Relationship:Naoto": "Married"
+      }
+    },
+{
+	"Action": "EditData",
+      "Target": "Strings/Events",
+      "Entries": {
+      	"BirthMessage_Adoption": "...亲爱的，我们的宝宝终于来了，很可爱...",
+        "HaveBabyQuestion": "...{0}，我在想，你愿意和我...生个宝宝吗。$6",
+        "HaveBabyQuestion_Adoption": "...{0}，我在想，你愿意和我...一起领养个宝宝吗。$6",
+        "HaveBabyAnswer_Yes": "当然，我很愿意。",
+        "HaveBabyAnswer_No": "不，暂时不想。",
+        "HavePlayerBabyQuestion": "宝宝很可爱，谢谢你...{0}。$16",
+        "HavePlayerBabyQuestion_Adoption": "宝宝很可爱，谢谢你...{0}。$16"
+      },
+	  "When":{
+      	"Relationship:Naoto": "Married"
+      }
+    },
+{
+	"Action": "EditData",
+      "Target": "Strings/StringsFromCSFiles",
+      "Entries": {
+        "NPC.cs.4406": "我不想动，昨晚忙到深夜，现在眼睛像被针扎过一样。$17#$b#想多睡会儿。$14",//赖床对话
+        "NPC.cs.4432": "我可以稍稍休息一会儿吗。",//抱怨家务对话
+        "NPC.cs.4440": "{0}, 我希望我们的领养请求能被批准。#$b#我很想和你一起抚养一个宝宝。$6",
+        "NPC.cs.4441": "{0}, 我提交了我们的领养文件。#$b#亲爱的，谢谢你愿意给我这个机会。$6",
+		"NPC.cs.4444": "{0}，我们很快就能有个孩子了。$1",
+		"NPC.cs.4447": "{0}，我们很快就能有个孩子了。$1",
+        "NPC.cs.4448": "{0}，看不出来吗，你怀孕了，我们很快就会有一个可爱的宝宝了。$16"
+      },
+      "When":{
+      	"Relationship:Naoto": "Married"
+      }
+    },	
+//雨天对话
+    {
+      "Action":"EditData",
+      "Target":"Characters/Dialogue/rainy",
+      "Entries":{
+      "Naoto":"这种天气还挺让人感到舒适的，不是吗？"
+      }
+    },
+//订婚对话，1.6是否可用尚且未知
+    {
+      "Action": "EditData",
+      "Target": "Data/EngagementDialogue",
+      "Entries": {
+          "Naoto0": "没想到最后能和你共度余生。$1#$b#感谢你选择了我。$16#$b#这是我的荣幸。$6",
+          "Naoto1": "谢谢...亲爱的，这真是...对我来说相当幸运的消息。$6#$b#我爱你，@。"
+      }
+  },
+//作为配偶，被邀请看电影的对话，1.6是否可用尚且未知
+    {
+      "Action":"EditData",
+      "Target":"Strings/Characters",
+      "Entries":{
+        "MovieInvite_Spouse_Naoto" :"邀请我去看电影？当然好啊，我们好久没约过会了，走吧，我在那儿等你。$16"
+      }
+    },
+//角色内容读取
+  {
+    "Action": "EditData",
+    "Target": "Data/animationDescriptions",//角色婚后的睡觉动画
+    "When": {
+      "Spouse": "Naoto"//配偶名字
+    },
+    "Entries": {
+      "Naoto_sleep": "51/51/51"//动画帧，这里为51号表情（注，配偶名字要求全部小写）
+    }
+  },
+  {
+    "Action": "Load",
+    "Target": "Maps/Custom_NaotoRoom",//配偶房名字，别乱写
+    "FromFile": "Assets/Maps/SpouseRooms/NaotoSpouseRoom.tmx"//配偶房的读取，和添加独立地图一样
+  },
+  {
+    "Action": "Load",
+    "Target": "Maps/Naoto_Spouse_Area",//配偶露台名字，同上
+    "FromFile": "Assets/Maps/SpouseRooms/Naoto_Spouse_Area.tbin"//配偶露台读取，同上
+  },
+    {
+		"LogName": "Sprites",
+      "Action": "Load",
+      "Target": "Characters/Naoto",
+      "FromFile": "assets/Image/sprites.png"//行走图读取，行走图需自备
+    },
+    {
+		"LogName":"Portraits",
+      "Action": "Load",
+      "Target": "Portraits/Naoto",
+      "FromFile": "assets/Image/Naoto.png"//肖像读取，需自备
+	},
+	{
+		"LogName":"Dialogue",
+      "Action": "Load",
+      "Target": "Characters/Dialogue/Naoto",
+      "FromFile": "assets/Dialogue/NaotoDialogue.json"//对话读取
+    },
+    {
+		"LogName":"Dialogue",
+      "Action": "Load",
+      "Target": "Characters/Dialogue/MarriageDialogueNaoto",
+      "FromFile": "assets/Dialogue/NaotoMarriageDialogue.json"//如果NPC可婚的话，婚后对话读取，不可婚请删掉
+    },
+	{
+		"LogName":"Schedule",
+      "Action": "Load",
+      "Target": "Characters/schedules/Naoto",
+      "FromFile": "assets/Schedule/schedule1.json",//行程读取
+      "when":
+      {
+        "HasSeenEvent |contains=Naoto11111": false//事件后关闭该条读取,11111111为事件号，不需要请从when开始删掉
+      }
+	},
+    {
+      "Action": "Load",
+      "Target": "Characters/schedules/Naoto",
+      "FromFile": "assets/Schedule/schedule2.json",//这是事件后替换行程用的读取，一般可以删掉
+	    "when":
+		{
+			"HasSeenEvent |contains=Naoto11111": true//事件后开启该条读取，同上
+		}
+		},
+		{
+      "Action": "Load",
+      "Target": "Strings/schedules/Naoto",
+      "FromFile": "assets/Schedule/ScheduleDialogueNaoto.json"//行程对话读取
+    },
+	
+	//地图交互时产生的信息，不做地图可以删掉
+	{	
+	"Action": "EditData",
+   	 		"Target": "Strings/StringsFromMaps",
+   	 		"Entries": {
+		 		"NaotoRoom.1": "柜子里是一台老式发报机，满是灰尘，看起来很久没用过了，旁边似乎放着两瓶新买的酒和几个撕掉标签的药瓶。"
+			}
+	},
+
+//电影院内容，如果没有特殊喜好需求，请直接修改对话，并去除对话上面一项引号内的特殊效果
+{
+    "Action": "EditData",
+    "Target": "Data/ConcessionTastes",
+    "Entries": {
+    "Name": "Naoto",//唯一ID
+    "LovedTags": [
+      "Healthy","Sweet"
+    ],
+    "LikedTags": [
+      "Salty","Jasmine Tea"
+    ],
+    "DislikedTags": [
+      "Salmon Burgers", "Joja"
+        ]
+      }
+    },
+	{
+	"Action": "EditData",
+	"Target": "Data/MoviesReactions",
+	"Entries": {
+	"Naoto": { //NPC名字
+    "NPCName": "Naoto",//NPC唯一ID
+    "Reactions": [
+	  {
+        "Tag": "spring_movie_0",//电影种类，只有单双数年的四季，结构基本一致，请自行编排
+        "Response": "like",//对电影的反应，love最爱，like喜欢，dislike不喜欢
+        "Whitelist": [],
+        "SpecialResponses": {
+          "BeforeMovie": {
+            "ResponsePoint": null,
+            "Script": "",
+            "Text": "动画电影啊...我不管是生理还是心理年龄来说应该都过了看这个的时候了吧。$14"//电影前对话
+          },
+          "DuringMovie": {
+            "ResponsePoint": null,
+            "Script": "",//电影中途反应
+            "Text": "...要挺住啊。*低声*$3"//电影中途对话
+          },
+          "AfterMovie": {
+            "ResponsePoint": null,
+            "Script": "",
+            "Text": "咳...$4#$b#谢了，这电影...还不错。$16"//电影结束后对话
+          }
+        },
+        "ID": "reaction_0"
+      },
+	  {
+        "Tag": "summer_movie_0",
+        "Response": "dislike",
+        "Whitelist": [],
+        "SpecialResponses": {
+          "BeforeMovie": {
+            "ResponsePoint": null,
+            "Script": "",
+            "Text": "游戏改编电影啊...我不常玩游戏...#$b#不过或许看看感觉也不坏。"
+          },
+          "DuringMovie": {
+            "ResponsePoint": null,
+            "Script": "/shake Naoto 500/pause 500/message \"111脸色看上去很差，随即低声咒骂了一句。\"",
+            "Text": "...$8#$b#...该死的！$5"
+          },
+          "AfterMovie": {
+            "ResponsePoint": null,
+            "Script": "",
+            "Text": "......$14#$b#抱歉。$14#$b#请让我静静。$17"
+          }
+        },
+        "ID": "reaction_1"
+      },
+	  {
+        "Tag": "fall_movie_0",
+        "Response": "like",
+        "Whitelist": [],
+        "SpecialResponses": {
+          "BeforeMovie": {
+            "ResponsePoint": null,
+            "Script": "",
+            "Text": "神秘事迹？这是...悬疑类还是恐怖类？*挠头*$7"
+          },
+          "DuringMovie": {
+            "ResponsePoint": null,
+            "Script": "/message \"Naoto看得津津有味。\"",
+            "Text": "看起来不错。$2#$b#氛围感还是挺足的。"
+          },
+          "AfterMovie": {
+            "ResponsePoint": null,
+            "Script": "",
+            "Text": "你在指望我被吓到吗？森林里的晚上可比这可怕多了。$14#$b#这种程度的恐怖片还不至于吓到我。$16"
+          }
+        },
+        "ID": "reaction_2"
+      },
+	  {
+        "Tag": "winter_movie_0",
+        "Response": "love",
+        "Whitelist": [],
+        "SpecialResponses": {
+          "BeforeMovie": {
+            "ResponsePoint": null,
+            "Script": "",
+            "Text": "家庭电影啊...希望拍得不错吧。$14"
+          },
+          "DuringMovie": {
+            "ResponsePoint": null,
+            "Script": "/message \"Naoto轻闭着双眼，像是在回忆什么。\"",
+            "Text": "那时的我们...也是这样...$17"
+          },
+          "AfterMovie": {
+            "ResponsePoint": null,
+            "Script": "",
+            "Text": "谢谢，不好意思，有些失态了，很高兴你会邀请我来。$4"
+          }
+        },
+        "ID": "reaction_3"
+      },
+      {
+        "Tag": "spring_movie_1",
+        "Response": "like",
+        "Whitelist": [],
+        "SpecialResponses": {
+          "BeforeMovie": {
+            "ResponsePoint": null,
+            "Script": "",
+            "Text": "嗯...其实我说不定见过这些地方。"
+          },
+          "DuringMovie": {
+            "ResponsePoint": null,
+            "Script": "",
+            "Text": "...果然是见过的地方，不过还是跟之前一样美。$1"
+          }, 
+          "AfterMovie": {
+            "ResponsePoint": null,
+            "Script": "",
+            "Text": "这也算故地重游的一种吧，你对那儿感兴趣？"
+          }
+        },
+        "ID": "reaction_4"
+      },
+      {
+        "Tag": "summer_movie_1",
+        "Response": "like",
+        "Whitelist": [],
+        "SpecialResponses": {
+          "BeforeMovie": {
+            "ResponsePoint": null,
+            "Script": "",
+            "Text": "这家伙，看起来蛮滑稽的，像史莱姆堆。$16"
+          },
+          "DuringMovie": {
+            "ResponsePoint": null,
+            "Script": "/message \"Naoto没忍住轻笑了一声。\"",
+            "Text": "噗呲...$16"
+          },
+          "AfterMovie": {
+            "ResponsePoint": null,
+            "Script": "",
+            "Text": "哈...$16#$b#这可真有意思，不知道制片人的灵感来自哪里。$1"
+          }
+        },
+        "ID": "reaction_5"
+      },
+	  {
+        "Tag": "fall_movie_1",
+        "Response": "like",
+        "Whitelist": [],
+        "SpecialResponses": {
+          "BeforeMovie": {
+            "ResponsePoint": null,
+            "Script": "",
+            "Text": "它在雨中嚎...这名字还真是直白啊。"
+          },
+          "DuringMovie": {
+            "ResponsePoint": null,
+            "Script": "/message \"Naoto看起来很期待。\"",
+            "Text": "效果不错嘛，看起来像真的一样。$1"
+          },
+          "AfterMovie": {
+            "ResponsePoint": null,
+            "Script": "",
+            "Text": "这部我只能说，勉勉强强吧。"
+          }
+        },
+        "ID": "reaction_6"
+      },
+	  {
+        "Tag": "winter_movie_1",
+        "Response": "love",
+        "Whitelist": [],
+        "SpecialResponses": {
+          "BeforeMovie": {
+            "ResponsePoint": null,
+            "Script": "",
+            "Text": "这部的风格应该很“厚重”吧，复古类的影片我都挺喜欢的。"
+          },
+          "DuringMovie": {
+            "ResponsePoint": null,
+            "Script": "/message \"Naoto看得入了神。\"",
+            "Text": "这值得深思..."
+          },
+          "AfterMovie": {
+            "ResponsePoint": null,
+            "Script": "",
+            "Text": "你觉得呢？#$b#...随口问问，每个人的感受都不同，谢谢你请我一起来看。$16"
+          }
+        },
+        "ID": "reaction_7"
+       }
+     ]
+	}
+	}
+	},
+//节日对话和站位
+{
+	"Action": "EditData",
+	"Target": "data/festivals/spring13",
+	"Entries": {
+	  "Naoto": "到处都是鸡蛋...一不留神就容易踩到它们。"//节日内的对话，这之后的所有节日都一样，改日期即可
+	}
+},
+{
+  "Action": "EditData",
+  "Target": "Data/Festivals/spring13",//这是节日日期
+  "TextOperations": [
+      {
+       "Operation": "Append",
+       "Target": [ "Entries", "Set-Up_additionalCharacters"],
+        "Value": "Naoto 21 72 1",//角色站位，这之后的所有节日都一样，改日期即可，111为NPC内部ID，21为横坐标，72为纵坐标，1为面部朝向，1右，2下，0上，3左
+        "Delimiter": "/"
+         }
+     ]
+ },
+
+{
+	"Action": "EditData",
+	"Target": "data/festivals/spring13",
+	"Entries": {
+	  "Naoto": "比赛加油，亲爱的。"//这是婚后角色在节日内的对话，这之后的所有节日都一样，改日期即可
+        },
+        "When": {
+			"Relationship:Naoto": "Married"
+		}
+	},
+{
+	"Action": "EditData",
+	"Target": "data/festivals/spring24",
+	"Entries": {
+	  "Naoto": "其实我本来不想来的，不过不需要我跳舞就好。$14"//花舞节时的对话，花舞节的比较特殊，再讲一次
+	}
+},
+{
+  "Action": "EditData",
+  "Target": "Data/Festivals/spring24",
+  "TextOperations": [
+      {
+       "Operation": "Append",
+       "Target": [ "Entries", "Set-Up_additionalCharacters"],
+        "Value": "Naoto 17 20 2",//这是NPC的普通站位
+        "Delimiter": "/"
+         },
+         {
+          "Operation": "Append",
+          "Target": ["Entries", "MainEvent_additionalCharacters"],
+          "Value": "Naoto 13 31 0",//这是NPC和你跳舞时站的位置，这里替换掉了阿比盖尔的站位
+          "Delimiter": "/"
+        }
+     ]
+ },
+{
+	"Action": "EditData",
+	"Target": "data/festivals/spring24",
+	"Entries": {
+                  "Naoto":  "嗯...你会邀请我跳舞的对吧。"
+        },//花舞节的婚后节日对话
+        "When": {
+			"Relationship:Naoto": "Married"
+		}
+	},
+{
+      "Action": "EditData",
+      "Target": "data/festivals/summer11",
+      "Entries": {
+        "Naoto": "每年的宴会我都会试着尝尝那汤，但...#$b#算了，我最好去吃点别的忘了这些味道。"
+      }
+    },
+    {
+      "Action": "EditData",
+      "Target": "Data/Festivals/summer11",
+      "TextOperations": [
+          {
+           "Operation": "Append",
+           "Target": [ "Entries", "Set-Up_additionalCharacters"],
+            "Value": "Naoto 9 14 3",
+            "Delimiter": "/"
+             }
+         ]
+     },
+    {
+    "Action": "EditData",
+    "Target": "data/festivals/summer11",
+    "Entries": {
+		"Naoto": "希望今年的汤的味道能好一些..."
+		 },
+      "When": {
+		    "Relationship:Naoto": "Married"
+      }	  
+    },
+{
+      "Action": "EditData",
+      "Target": "data/festivals/summer28",
+      "Entries": {
+        "Naoto": "不知道多年前那几只小水母现在如何。"
+      }
+    },
+    {
+      "Action": "EditData",
+      "Target": "Data/Festivals/summer28",
+      "TextOperations": [
+          {
+           "Operation": "Append",
+           "Target": [ "Entries", "Set-Up_additionalCharacters"],
+            "Value": "Naoto 50 24 2",
+            "Delimiter": "/"
+             }
+         ]
+     },
+    {
+      "Action": "EditData",
+      "Target": "data/festivals/summer28",
+      "Entries": {
+        "Naoto": "这些小家伙来了，也就意味着夏天要结束了...#$b#预祝农场迎来一个顺利且丰收的秋季。$16"
+      },
+      "When": {
+        "Relationship:Naoto": "Married"
+      }	  
+    },
+{
+      "Action": "EditData",
+      "Target": "data/festivals/fall16",
+      "Entries": {
+        "Naoto": "秋季展览会总会有不少外来游客，这座小镇也会久违的热闹起来。"
+      }
+    },
+    {
+      "Action": "EditData",
+      "Target": "Data/Festivals/fall16",
+      "TextOperations": [
+          {
+           "Operation": "Append",
+           "Target": [ "Entries", "Set-Up_additionalCharacters"],
+            "Value": "Naoto 21 66 1",
+            "Delimiter": "/"
+             }
+         ]
+     },
+    {
+      "Action": "EditData",
+      "Target": "data/festivals/fall16",
+      "Entries": {
+        "Naoto": "玩的开心吗？"
+      },
+      "When": {
+        "Relationship:Naoto": "Married"
+      }	  
+    },
+{
+      "Action": "EditData",
+      "Target": "data/festivals/fall27",
+      "Entries": {
+        "Naoto": "万灵节总是很有节日氛围。$16#$b#听说里面还有藏起来的宝物，不过我是没找到，谁知道呢，或许你能找到它。$1"
+				 }
+    },
+    {
+      "Action": "EditData",
+      "Target": "Data/Festivals/fall27",
+      "TextOperations": [
+          {
+           "Operation": "Append",
+           "Target": [ "Entries", "Set-Up_additionalCharacters"],
+            "Value": "Naoto 27 53 2",
+            "Delimiter": "/"
+             }
+         ]
+     },
+	{
+	  "Action": "EditData",
+	  "Target": "data/festivals/fall27",
+	  "Entries": {
+		"Naoto": "需要我陪你一起吗？$1#$b#你想自己去啊...好吧。$14"
+		},
+		"When": {
+        "Relationship:Naoto": "Married"
+      }	  
+	},
+{
+      "Action": "EditData",
+      "Target": "data/festivals/winter8",
+      "Entries": {
+        "Naoto": "曾经我也经常去冬钓。"
+				 }
+    },
+    {
+      "Action": "EditData",
+      "Target": "Data/Festivals/winter8",
+      "TextOperations": [
+          {
+           "Operation": "Append",
+           "Target": [ "Entries", "Set-Up_additionalCharacters"],
+            "Value": "Naoto 66 50 2",
+            "Delimiter": "/"
+             }
+         ]
+     },
+	{
+	  "Action": "EditData",
+	  "Target": "data/festivals/winter8",
+	  "Entries": {
+		"Naoto": "你冷吗？$1#$b#呼...*呼气*$17#$b#待会儿比赛加油，我家亲爱的肯定是第一名。$16"
+		},
+		"When": {
+        "Relationship:Naoto": "Married"
+      }	  
+	},
+{
+      "Action": "EditData",
+      "Target": "data/festivals/winter25",
+      "Entries": {
+        "Naoto": "圣诞节啊...还记得以前也曾与其他人约好一起过圣诞的。"
+				 }
+    },
+    {
+      "Action": "EditData",
+      "Target": "Data/Festivals/winter25",
+      "TextOperations": [
+          {
+           "Operation": "Append",
+           "Target": [ "Entries", "Set-Up_additionalCharacters"],
+            "Value": "Naoto 38 57 3",
+            "Delimiter": "/"
+             }
+         ]
+     },
+	{
+	  "Action": "EditData",
+	  "Target": "data/festivals/winter25",
+	  "Entries": {
+		"Naoto": "圣诞快乐！亲爱的！"
+	  },
+		"When": {
+        "Relationship:Naoto": "Married"
+      }	  
+	},
+
+//动画
+{
+		"Action": "EditData",
+		"Target": "Data/animationdescriptions",
+		"Entries": {
+		"Naoto_nap": "39/39 39 39 39 39 39 39 39 39 39 39 35 35 35 35 35 35 35 35 39 39 39 39 39 39 39 39 39 39 39 35 35 35 35 35 35 35 35/39",
+		"Naoto_sleep": "51/51/51"//角色的动画，按照行走图动画帧来写
+		}
+},
+
+//好感事件
+//0心
+{
+  "Action": "EditData",
+  "Target": "Data/Events/Mountain",//事件触发地点
+  "Entries": {
+	"64214616/j 4/t 600 2400": "fall2/63 13/farmer 59 9 1 Naoto 69 19 1/pause 1500/skippable/move farmer 0 2 2/move farmer 9 0 2/emote farmer 8/faceDirection farmer 2/message \"那边好像有个人...？\"/pause 500/message \"过去看看。\"/globalFade/viewport -1000 -1000/pause 1000/viewport 64 21/Warp farmer 57 22/move farmer 0 -1 0/move farmer 9 0 3/move farmer 0 -1 0/emote 111 16/pause 500/speak 111 \"是谁？\"/faceDirection 111 3/pause 500/emote farmer 40/pause 500/move farmer 0 -1 1/message \"你好，我是最近刚搬到镇上来的农夫。\"/pause 500/speak 111 \"...啊，是你，你好，@！\"/pause 500/speak 111 \"山里的空气很好，很适合闲逛，你是来散步的吗？\"/pause 300/message \"是的，来走走，顺带看看被滑坡堵住的路，你呢。\"/pause 500/speak 111 \"我也一样！嗯...你有事要忙的话就先去吧，要闲聊的话你随时可以找到我。\"/move farmer 0 2 2/pause 500/speak 111 \"再见，@，日后多多关照。\"/pause 500/message \"多多关照，再见。\"/pause 500/faceDirection 111 1/move farmer 0 2 3/move farmer -9 0 2/move farmer 0 5 2/pause 1000/end"
+  }//这是一个在山区的事件，可以暂时作为初遇占位符，本质上是我的NPC删减修改后的事件，请在发布时改掉，感谢配合
+}
+	]
+}
